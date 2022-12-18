@@ -8,10 +8,11 @@ namespace DreamHive.Controllers
     public class HomeController : Controller
     {
         private readonly EmailService _emailService;
-        private readonly FirebaseRealTimeServices _subscribe;
-        public HomeController(EmailService emailService, FirebaseRealTimeServices subscribe)
+        private readonly FirebaseRealTimeServices _firebase;
+        public HomeController(EmailService emailService, FirebaseRealTimeServices firebase)
         {
-                _emailService = emailService;
+            _emailService = emailService;
+            _firebase= firebase;    
         }
         [HttpGet]
         public IActionResult Index()
@@ -24,6 +25,7 @@ namespace DreamHive.Controllers
             if(ModelState.IsValid )
             {
                await _emailService.SendEmail(contact.Email, "2018293130@ufs4life.ac.za", contact.Subject, contact.Message);
+                await _firebase.SaveMessage(contact);
                 return View();
             }
             else
@@ -47,7 +49,7 @@ namespace DreamHive.Controllers
                     Email = subscription.Email
                 };
               await  _emailService.SendEmail(from, subscription.Email, Subject, message);
-                await _subscribe.AddSubscription(newSub);
+                await _firebase.AddSubscription(newSub);
                 return RedirectToAction("Index");
             }
             else

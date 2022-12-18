@@ -19,5 +19,13 @@ namespace DreamHive.Services
                 return true;
             return false;
         }
+        public async Task<bool> SaveMessage(Contact message)
+        {
+            var _message = await firebase.Child("Messages")
+                .PostAsync(message);
+            if (_message != null)
+                return true;
+            return false;
+        }
     }
 }
