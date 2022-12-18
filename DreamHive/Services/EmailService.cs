@@ -5,10 +5,10 @@ namespace DreamHive.Services
 {
     public class EmailService
     {
-        public void SendEmail(string? from, string? to, string? subject, string? body)
+        public async Task SendEmail(string? from, string? to, string? subject, string? body)
         {
             // Create a new MailMessage object
-            MailMessage message = new MailMessage(from, to, subject, body);
+            MailMessage message = new MailMessage(from, to, subject, body) { Priority = MailPriority.High, ReplyTo=new MailAddress(from) };
             // Set the server and credentials for sending the email
             var password = "oxdzqdneoaxpqzsc";
             var smtp = new SmtpClient
@@ -20,6 +20,7 @@ namespace DreamHive.Services
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential("student24donotreply@gmail.com", password)
             };
+            smtp.SendAsync(message,null);
         }
     }
 }
