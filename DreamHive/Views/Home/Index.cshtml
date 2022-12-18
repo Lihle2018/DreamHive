@@ -418,31 +418,31 @@
 			<h5>Send Us A Message</h5>
 
 			<!-- form -->
-			<form asp-action="Index" name="contactForm" id="contactForm" method="post">
+			<form asp-action="Index" asp-controller="Home" method="post">
 
 				<div class="form-field">
 					<input asp-for="Name" type="text"  placeholder="Name" value="" minlength="2" required="">
-					<span asp-validation-for="Name" class="ss-error"></span>
+					<span asp-validation-for="Name" ></span>
 				</div>
 
 				<div class="row">
 					<div class="col-six tab-full">
 						<div class="form-field">
 							<input asp-for="Email"  type="email"  required="" placeholder="Email">
-							<span asp-validation-for="Email" class="ss-error"></span>
+							<span asp-validation-for="Email"></span>
 						</div>
 					</div>
 					<div class="col-six tab-full">
 						<div class="form-field">
 							<input asp-for="Subject"  type="text"  placeholder="Subject" required="">
-							<span asp-validation-for="Subject" class="ss-error"></span>
+							<span asp-validation-for="Subject" ></span>
 						</div>
 					</div>
 				</div>
 
 				<div class="form-field">
 					<textarea asp-for="Message" placeholder="message" rows="10" cols="50" required=""></textarea>
-					<span asp-validation-for="Message" class="ss-error"></span>
+					<span asp-validation-for="Message"></span>
 				</div>
 
 				<div class="form-field">
