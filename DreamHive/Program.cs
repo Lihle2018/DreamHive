@@ -1,6 +1,8 @@
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllersWithViews(); 
+using DreamHive.Services;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<EmailService>();
 var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseStaticFiles();

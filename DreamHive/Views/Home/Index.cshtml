@@ -418,30 +418,30 @@
 			<h5>Send Us A Message</h5>
 
 			<!-- form -->
-			<form action="Index" name="contactForm" id="contactForm" method="post">
+			<form asp-action="Index" name="contactForm" id="contactForm" method="post">
 
 				<div class="form-field">
-					<input asp-for="Name" name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2" required="">
+					<input asp-for="Name" type="text"  placeholder="Name" value="" minlength="2" required="">
 					<span asp-validation-for="Name" class="ss-error"></span>
 				</div>
 
 				<div class="row">
 					<div class="col-six tab-full">
 						<div class="form-field">
-							<input asp-for="Email" name="contactEmail" type="email" id="contactEmail" placeholder="Email" >
+							<input asp-for="Email"  type="email"  required="" placeholder="Email">
 							<span asp-validation-for="Email" class="ss-error"></span>
 						</div>
 					</div>
 					<div class="col-six tab-full">
 						<div class="form-field">
-							<input asp-for="Subject" name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="">
+							<input asp-for="Subject"  type="text"  placeholder="Subject" required="">
 							<span asp-validation-for="Subject" class="ss-error"></span>
 						</div>
 					</div>
 				</div>
 
 				<div class="form-field">
-					<textarea asp-for="Message" name="contactMessage" id="contactMessage" placeholder="message" rows="10" cols="50" required=""></textarea>
+					<textarea asp-for="Message" placeholder="message" rows="10" cols="50" required=""></textarea>
 					<span asp-validation-for="Message" class="ss-error"></span>
 				</div>
 
@@ -459,13 +459,13 @@
 				</div>
 
 			</form> <!-- end form -->
-			<!-- contact-warning -->
+			@*<!-- contact-warning -->
 			<div id="message-warning"></div>
 
 			<!-- contact-success -->
 			<div id="message-success">
 				<i class="fa fa-check"></i>Your message was sent, thank you!<br>
-			</div>
+			</div>*@
 
 		</div> <!-- end col-seven -->
 
