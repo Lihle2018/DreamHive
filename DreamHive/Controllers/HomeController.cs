@@ -8,7 +8,8 @@ namespace DreamHive.Controllers
     public class HomeController : Controller
     {
         private readonly EmailService _emailService;
-        public HomeController(EmailService emailService)
+        private readonly FirebaseRealTimeServices _subscribe;
+        public HomeController(EmailService emailService, FirebaseRealTimeServices subscribe)
         {
                 _emailService = emailService;
         }
@@ -18,14 +19,42 @@ namespace DreamHive.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(Contact contact)
+        public async Task<IActionResult> Index(Contact contact)
         {
             if(ModelState.IsValid )
             {
-                _emailService.SendEmail(contact.Email, "2018293130@ufs4life.ac.za", contact.Subject, contact.Message);
+               await _emailService.SendEmail(contact.Email, "2018293130@ufs4life.ac.za", contact.Subject, contact.Message);
                 return View();
             }
-            return View(contact);
+            else
+            {
+                return View(contact);
+            }
+            
+        }
+        [HttpPost]
+        public async Task<IActionResult> Subscribe(Subscription subscription)
+        {
+            if(ModelState.IsValid)
+            {
+                var message = "Thank you for subscribing to our newsletter! We're excited to share our updates and content with you, and we hope you find it valuable and informative. If you have any feedback or suggestions for future newsletters, please don't hesitate to reach out to us. We appreciate your support and look forward to staying connected with you.";
+                var Subject= "Thanks for signing up for our updates!";
+                var from = "mqhayilihle@gmail.com";
+                var newSub = new Subscription()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    DateCreated = DateTime.Now,
+                    Email = subscription.Email
+                };
+              await  _emailService.SendEmail(from, subscription.Email, Subject, message);
+                await _subscribe.AddSubscription(newSub);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index",subscription);
+            }
+            
         }
     }
 }
