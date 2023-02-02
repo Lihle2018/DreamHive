@@ -26,11 +26,11 @@ namespace DreamHive.Controllers
             {
                await _emailService.SendEmail(contact.Email, "2018293130@ufs4life.ac.za", contact.Subject, contact.Message);
                 await _firebase.SaveMessage(contact);
-                return View();
+                return PartialView("_ContactFormPartial");
             }
             else
             {
-                return View(contact);
+                return PartialView("_ContactFormPartial",contact);
             }
             
         }
