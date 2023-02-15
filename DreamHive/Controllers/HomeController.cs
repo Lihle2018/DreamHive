@@ -25,12 +25,12 @@ namespace DreamHive.Controllers
             if(ModelState.IsValid )
             {
                await _emailService.SendEmail(contact.Email, "2018293130@ufs4life.ac.za", contact.Subject, contact.Message);
-                await _firebase.SaveMessage(contact);
-                return PartialView("_ContactFormPartial");
+              //  await _firebase.SaveMessage(contact);
+                return View();
             }
             else
             {
-                return PartialView("_ContactFormPartial",contact);
+                return View(contact);
             }
             
         }
